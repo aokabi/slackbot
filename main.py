@@ -2,9 +2,12 @@ import requests
 import asyncio
 import websockets
 import json
+import configparser
+inifile = configparser.ConfigParser()
+inifile.read('./config.ini', 'UTF-8')
 #oauth = requests.get('https://slack.com/oauth/authorize')
 #print(oauth.text)
-token = ''
+token = inifile.get('settings', 'token')
 headers = {'accept': 'application/x-www-form-urlencoded'}
 r = requests.get('https://slack.com/api/rtm.connect', headers=headers, params={'token': token})
 wss = r.json()['url']
