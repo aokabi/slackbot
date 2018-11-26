@@ -4,7 +4,7 @@ import websockets
 import json
 #oauth = requests.get('https://slack.com/oauth/authorize')
 #print(oauth.text)
-token = 'xoxp-3069876617-4312379481-121065493056-9b64cb023821685f1379a866b39e5086'
+token = ''
 headers = {'accept': 'application/x-www-form-urlencoded'}
 r = requests.get('https://slack.com/api/rtm.connect', headers=headers, params={'token': token})
 wss = r.json()['url']
