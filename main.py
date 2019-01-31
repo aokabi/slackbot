@@ -19,19 +19,27 @@ async def hello():
             if d['type'] == 'message':
                 try:
                     darray = d['text'].split()
-                    print(darray)
                     if darray.pop(0).capitalize() == 'Your':
                         target = darray.pop(0)
                         if target == 'name':
                             if darray.pop(0) == 'is':
                                 name = " ".join(darray)
                                 r = requests.post('https://slack.com/api/users.profile.set', data={'token':token, 'name':'display_name', 'value':name})
-                                print(r)
+                                print(r.text)
                         elif target == 'status':
                             if darray.pop(0) == 'is':
                                 status = darray.pop(0)
                                 r = requests.post('https://slack.com/api/users.profile.set', data={'token':token, 'name':'status_emoji', 'value':status})
+                                print(r.text)
+                        elif target == 'icon':
+                            if darray.pop(0) == 'is':
+                                icon = darray.pop(0)
+                                print(icon.replace('<','').replace('>',''))
+                                image = requests.get(icon.replace('<','').replace('>',''))
+                                print(type(image.content))
+                                r = requests.post('https://slack.com/api/users.setPhoto', data={'token':token}, files={'image':image.content})
                                 print(r)
+                                print(t.text)
                 except:
                     continue
 
