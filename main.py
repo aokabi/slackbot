@@ -44,3 +44,5 @@ async def hello():
                     continue
 
 asyncio.get_event_loop().run_until_complete(hello())
+requests.post('https://slack.com/api/users.profile.set', data={'token':token, 'name':'status_emoji', 'value':':old_noto_innocent:'})
+print("slackbot died.")
